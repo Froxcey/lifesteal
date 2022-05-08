@@ -1,0 +1,32 @@
+- [x] ItemManager
+  - [x] Texture
+- [ ] Commands
+  - [ ] LsAdmin
+    - [ ] Completer
+      - [x] Give + heart + reset: OnlineList
+      - [x] Revive: BannedList
+      - [x] Eliminate: All
+      - [ ] Config
+    - [ ] Executer
+      - [ ] Eliminate: set to min health and add to ban list (then kick/gamemode)
+      - [ ] Revive: remove from ban list
+      - [ ] Reset: check and remove from ban list, set cap to 20
+      - [ ] Set: check range, set health
+      - [ ] Config
+      - [ ] Give: Inventory add a heart
+  - [ ] Lifesteal
+    - [x] Completer
+      - [x] Withdraw
+      - [x] Revive
+    - [ ] Executer
+      - [x] Withdraw
+      - [ ] Revive
+- [ ] Elimination Manager
+- [x] Events
+  - [x] Join
+  - [x] Kill
+  - [x] Interact (right click): check max health then remove heart + increase cap
+- [x] HealthManager
+- [x] Config
+- [x] Main
+- [ ] Recipe

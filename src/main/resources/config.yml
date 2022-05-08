@@ -1,0 +1,12 @@
+# If this is disabled, lifesteal will be disabled.
+# Redeeming hearts and commands will still work.
+enabled: true
+
+# Set to 0 to disable max health
+maxHealth: 60.00
+
+# If this is set to false, killing one heart player does absolutely nothing
+elimination: true
+
+# If this is set to false, only player kills cause lifesteal
+environmentLifesteal: true

@@ -1,0 +1,17 @@
+name: Lifesteal
+version: '${project.version}'
+main: net.frox.lifesteal.Lifesteal
+api-version: 1.18
+authors: [ Froxcey ]
+description: Another lifesteal Minecraft plugin. Welcone to hell!
+commands:
+  lifesteal:
+    description: Commands for lifesteal.
+    usage: /lifesteal <withdraw/revive/help>
+  lsadmin:
+    description: Commands for lifesteal moderation.
+    usage: /lsadmin <reset/revivie/eliminate/set/config/help>
+permissions:
+  lifesteal.moderate:
+    description: Allows you to moderate lifesteal plugins
+    default: false
