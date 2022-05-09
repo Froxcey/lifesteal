@@ -45,6 +45,11 @@ public class LifestealCmd implements CommandExecutor {
                 }
                 return true;
 
+            case "resourcepack":
+
+                ((Player) sender).setResourcePack("https://github.com/froxcey/lifesteal/raw/main/Pack.zip", "3dd7c3c7a5eab80ce6b94c9cd4be371f4bcef1b8");
+                return true;
+
             case "revive":
 
                 if (args.length != 2){

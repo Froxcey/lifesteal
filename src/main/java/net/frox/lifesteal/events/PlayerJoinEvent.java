@@ -41,6 +41,6 @@ public class PlayerJoinEvent implements Listener {
             return;
         }
 
-        player.setResourcePack("https://www.dropbox.com/s/tol9o4956guxn00/CustomPack.zip?dl=1");
+        player.setResourcePack("https://github.com/froxcey/lifesteal/raw/main/Pack.zip", "3dd7c3c7a5eab80ce6b94c9cd4be371f4bcef1b8");
     }
 }

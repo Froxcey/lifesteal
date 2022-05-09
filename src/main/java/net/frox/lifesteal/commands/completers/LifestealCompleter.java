@@ -16,7 +16,7 @@ public class LifestealCompleter implements TabCompleter {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
         if (args.length == 1){
-            final String[] COMMANDS = {"withdraw", "revive", "help", "about"};
+            final String[] COMMANDS = {"withdraw", "revive", "help", "about", "resourcepack"};
             ArrayList<String> completerList = new ArrayList<>();
             for (String cmd : COMMANDS) {
                 if (cmd.startsWith(args[0])){
