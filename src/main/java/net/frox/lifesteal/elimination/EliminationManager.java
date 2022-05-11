@@ -10,6 +10,8 @@ import org.bukkit.plugin.Plugin;
 import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,64 +25,75 @@ public class EliminationManager {
     private static void reload() {
         file = new File(Main.getDataFolder(), "banlist.yml");
         if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Main.saveResource("banlist.yml", false);
+            file = new File(Main.getDataFolder(), "banlist.yml");
         }
         listConfig = YamlConfiguration.loadConfiguration(file);
     }
 
-    public static List<EliminatedPlayer> list(){
+    public static ArrayList<UUID> list(){
 
         reload();
-        return (List<EliminatedPlayer>) listConfig.getList("eliminatedList");
+
+        List<String> eliminatedList = (List<String>) listConfig.getList("EliminatedList");
+        ArrayList<UUID> eliminatedUUID = new ArrayList<UUID>();
+        for(String playerId: eliminatedList){
+            if (playerId == null) continue;
+            eliminatedUUID.add(UUID.fromString(playerId));
+        };
+        return eliminatedUUID;
 
     }
 
-    public static FileConfiguration get(){
+    public static String getReason(UUID uuid){
 
         reload();
-        return listConfig;
+
+        return listConfig.getString(String.valueOf(uuid));
 
     }
 
     public static void add(UUID uuid, @Nullable String killer){
 
-        reload();
-        List<EliminatedPlayer> eliminatedPlayerList = (List<EliminatedPlayer>) listConfig.getList("eliminatedList");
-        EliminatedPlayer newEliminated = new EliminatedPlayer() {};
-        if (killer == null){
-            newEliminated.killer = "environment";
-        } else {
-            newEliminated.killer = killer;
-        }
-        newEliminated.uuid = uuid;
-        eliminatedPlayerList.add(newEliminated);
-        try {
-            listConfig.save(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         if (Bukkit.getPlayer(uuid).isOp()) {
             Bukkit.getPlayer(uuid).setGameMode(GameMode.SPECTATOR);
             Bukkit.getPlayer(uuid).sendMessage("You got eliminated by " + killer);
         } else {
-            Bukkit.getPlayer(uuid).kickPlayer("You got eliminated by " + killer);
+            reload();
+            Bukkit.getPlayer(uuid).kickPlayer("You got eliminated by " + killer + "\nYou can tell someone to revive you by doing /lifesteal revive " + Bukkit.getPlayer(uuid).getName());
+            List<String> eliminatedPlayerList = (List<String>) listConfig.getList("EliminatedList");
+            eliminatedPlayerList.add(String.valueOf(uuid));
+            listConfig.set(String.valueOf(uuid), killer);
+            try {
+                listConfig.save(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public static void remove(UUID uuid){
         reload();
-        List<EliminatedPlayer> eliminatedPlayerList = (List<EliminatedPlayer>) listConfig.getList("eliminatedList");
-        assert eliminatedPlayerList != null;
-        eliminatedPlayerList.removeIf(player -> player.uuid.equals(uuid));
+        listConfig.set(String.valueOf(uuid), null);
+        List<String> eliminatedPlayerList = (List<String>) listConfig.getList("EliminatedList");
+        if (eliminatedPlayerList == null) return;
+        for (Iterator<String> iterator = eliminatedPlayerList.iterator(); iterator.hasNext(); ) {
+            String value = iterator.next();
+            if (value == null) continue;
+            if (value.equals(uuid.toString())) {
+                iterator.remove();
+            }
+        }
+
+        for (String playerid :
+                eliminatedPlayerList) {
+            if (playerid == null) continue;
+            if (playerid.equals(uuid.toString())) eliminatedPlayerList.remove(playerid);
+        }
         try {
             listConfig.save(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

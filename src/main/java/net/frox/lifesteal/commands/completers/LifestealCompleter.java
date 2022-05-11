@@ -1,6 +1,5 @@
 package net.frox.lifesteal.commands.completers;
 
-import net.frox.lifesteal.elimination.EliminatedPlayer;
 import net.frox.lifesteal.elimination.EliminationManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -30,8 +29,8 @@ public class LifestealCompleter implements TabCompleter {
             if (EliminationManager.list() == null) {
                 return Collections.singletonList("");
             }
-            for (EliminatedPlayer player : EliminationManager.list()) {
-                String cprName = Bukkit.getOfflinePlayer(player.uuid).getName();
+            for (UUID playerUUID : EliminationManager.list()) {
+                String cprName = Bukkit.getOfflinePlayer(playerUUID).getName();
                 if (cprName.toLowerCase().startsWith(args[1].toLowerCase())){
                     playerList.add(cprName);
                 }

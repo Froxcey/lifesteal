@@ -1,6 +1,5 @@
 package net.frox.lifesteal.commands.completers;
 
-import net.frox.lifesteal.elimination.EliminatedPlayer;
 import net.frox.lifesteal.elimination.EliminationManager;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -53,9 +52,9 @@ public class LsadminCompleter implements TabCompleter {
                     if (EliminationManager.list() == null) {
                         return Collections.singletonList("");
                     }
-                    for (EliminatedPlayer player : EliminationManager.list()){
-                        if (Bukkit.getOfflinePlayer(player.uuid).getName().toLowerCase().startsWith(args[1].toLowerCase()))
-                            playerList.add(Bukkit.getOfflinePlayer(player.uuid).getName());
+                    for (UUID playerUUID : EliminationManager.list()){
+                        if (Bukkit.getOfflinePlayer(playerUUID).getName().toLowerCase().startsWith(args[1].toLowerCase()))
+                            playerList.add(Bukkit.getOfflinePlayer(playerUUID).getName());
                     }
                     return playerList;
                 case "config":

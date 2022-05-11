@@ -14,14 +14,14 @@
       - [ ] Set: check range, set health
       - [ ] Config
       - [ ] Give: Inventory add a heart
-  - [ ] Lifesteal
+  - [x] Lifesteal
     - [x] Completer
       - [x] Withdraw
       - [x] Revive
-    - [ ] Executer
+    - [x] Executer
       - [x] Withdraw
-      - [ ] Revive
-- [ ] Elimination Manager
+      - [x] Revive
+- [x] Elimination Manager
 - [x] Events
   - [x] Join
   - [x] Kill
@@ -29,4 +29,4 @@
 - [x] HealthManager
 - [x] Config
 - [x] Main
-- [ ] Recipe
+- [x] Recipe

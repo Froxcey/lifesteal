@@ -1,6 +1,5 @@
 package net.frox.lifesteal.commands;
 
-import net.frox.lifesteal.Lifesteal;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
